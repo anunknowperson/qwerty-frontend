@@ -14,6 +14,13 @@ export default function RootLayout({ children }: { children: any }) {
       <head>
         <ColorSchemeScript />
         <link rel="shortcut icon" href="/favicon.svg" />
+
+        <link rel="preload" as="image" href="/bg1.jpg" />
+        <link rel="preload" as="image" href="/bg2.jpg" />
+        <link rel="preload" as="image" href="/bg3.jpg" />
+        <link rel="preload" as="image" href="/bg4.jpg" />
+        <link rel="preload" as="image" href="/bg5.jpg" />
+
         <meta
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"

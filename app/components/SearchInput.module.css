@@ -1,0 +1,29 @@
+/* components/SearchInput.module.css */
+
+.searchContainer {
+    display: flex;
+    width: 100%;
+  }
+  
+  .input {
+    flex: 1;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: none;
+    /* Optional: Adjust padding and font size if needed */
+  }
+  
+  .searchButton {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    margin-left: -1px; /* Overlap borders to connect seamlessly */
+    border-left: none;
+    /* Ensure the button height matches the input */
+    display: flex;
+    align-items: center;
+  }
+  

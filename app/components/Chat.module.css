@@ -1,0 +1,70 @@
+/* Chat.module.css */
+
+
+.message {
+  max-width: 70%;
+  position: relative;
+  padding-bottom: 20px;
+}
+
+.userMessage {
+  margin-left: auto;
+  white-space: pre-wrap;
+  background-color: var(--mantine-color-blue-1);
+}
+
+.botMessage {
+  margin-right: auto;
+  white-space: pre-wrap;
+  background-color: var(--mantine-color-gray-1);
+}
+
+.timestamp {
+  position: absolute;
+  bottom: 2px;
+  right: 8px;
+  opacity: 0.7;
+}
+
+.md {
+  color: white;
+}
+
+.blockquoteRoot {
+  
+  /* Background in light mode */
+  --bq-bg-light: #3ce5ff7e !important;
+
+  --bq-radius: 64px !important;
+  /* Border radius */
+}
+
+.blockquoteIcon {
+  color: #4640ff !important;
+  /* Customize icon color */
+}
+
+.blockquoteCite {
+  font-style: italic !important;
+  /* Style cite text */
+  color: #d0ceff !important;
+}
+
+.blockquoteBotRoot {
+  --bq-bg-light: #3c6dff7e !important;
+  /* Background in light mode */
+
+  --bq-radius: 64px !important;
+  /* Border radius */
+}
+
+.blockquoteBotIcon {
+  color: #4640ff !important;
+  /* Customize icon color */
+}
+
+.blockquoteBotCite {
+  font-style: italic !important;
+  /* Style cite text */
+  color: #d0ceff !important;
+}
