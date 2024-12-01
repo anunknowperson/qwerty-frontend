@@ -15,7 +15,7 @@ import LanguageSwitcher from './LanguageSwitcher';
 interface Message {
   id: string;
   text: string;
-  sender: 'user' | 'bot';
+  sender: 'user' | 'assistant';
 }
 
 const Hello = ({ startChat }: any) => {
@@ -62,9 +62,9 @@ const Hello = ({ startChat }: any) => {
       </div>
       <div className={styles.buttonsContainer}>
         {buttons.map((btn, index) => (
-          <button 
-            key={index} 
-            className={styles.buttonWithIcon} 
+          <button
+            key={index}
+            className={styles.buttonWithIcon}
             onClick={() => { startChat(btn.label) }}
           >
             <span className="icon">{btn.icon}</span>
@@ -112,7 +112,7 @@ export default function Homepage() {
     const newMessage: Message = {
       id: crypto.randomUUID(),
       text,
-      sender: 'bot',
+      sender: 'assistant',
     };
 
     if (isStreaming) {
@@ -121,7 +121,7 @@ export default function Homepage() {
         const lastMessageIndex = prev.length - 1;
         const updatedMessages = [...prev];
 
-        if (lastMessageIndex >= 0 && prev[lastMessageIndex].sender === 'bot') {
+        if (lastMessageIndex >= 0 && prev[lastMessageIndex].sender === 'assistant') {
           updatedMessages[lastMessageIndex] = {
             ...updatedMessages[lastMessageIndex],
             text: updatedMessages[lastMessageIndex].text + text
@@ -140,20 +140,26 @@ export default function Homepage() {
 
   const fetchStreamingResponse = async (userMessage: string) => {
     // Create initial bot message placeholder
+    var t :any =[...messages, {'sender': 'user', 'text': userMessage}];
+ 
+    const transformedMessages = t.map((message :any) => ({
+      role: message.sender,
+      content: message.text
+    }));
+
     addBotMessage('', true);
 
+    console.log(messages);
+
     try {
-      const response = await fetch('http://37.194.195.213:35411/v1/chat/completions', {
+      const response = await fetch('http://37.194.195.213:35420/query', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          messages: [
-            { role: 'user', content: userMessage }
-          ],
-          model: 'saiga',
-          stream: true
+          messages: transformedMessages,
+          "max_tokens": 300,
         })
       });
 
@@ -170,17 +176,15 @@ export default function Homepage() {
         if (done) break;
 
         const chunk = decoder.decode(value);
-        console.log(chunk);
         const lines = chunk.split('\n');
         try {
           for (const line of lines) {
             if (line.startsWith('data: ')) {
 
-              const jsonStr = line.slice(6).trim();
+              const jsonStr = line.slice(6);
               if (jsonStr === '[DONE]') break;
 
-              const parsedChunk = JSON.parse(jsonStr);
-              const delta = parsedChunk.choices?.[0]?.delta?.content;
+              const delta = jsonStr;
 
               if (delta) {
                 addBotMessage(delta, true);

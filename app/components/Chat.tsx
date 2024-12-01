@@ -9,7 +9,7 @@ import Markdown from 'react-markdown';
 interface Message {
   id: string;
   text: string;
-  sender: 'user' | 'bot';
+  sender: 'user' | 'assistant';
 }
 
 export function Chat({ messages }: { messages: Message[] }) {
